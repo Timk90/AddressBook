@@ -1,5 +1,4 @@
-<%@ page import="main.java.ru.addressbook.service.AddressBookServiceImp" %>
-<%@ page import="main.java.ru.addressbook.mapper.User" %>
+<%@ page import="main.java.ru.addressbook.bean.User" %>
 <%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: Tim
@@ -7,14 +6,17 @@
   Time: 23:05
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <style>
   #tableContent{
     color: blue;
     font-size: 14pt;
-    alignment: left;
+    align-content: center;
+    border-color: #27b533;
+    vertical-align: middle;
+
   }
   #message{
     color: #ff75e5;
@@ -32,6 +34,27 @@
     font-size: 16pt;
     font-weight: bold;
   }
+  #logout{
+    background: green;
+    color: yellow;
+    font-size: 14pt;
+  }
+  #addButon{
+    background: green;
+    color: yellow;
+    font-size: 14pt;
+  }
+  .buttons{
+    font-size: 14pt;
+    color: green;
+    font-weight: bold;
+    background: yellow;
+  }
+  .hiddens{
+    width: 0;
+    margin: 0;
+    height: 0;
+  }
 
 </style>
 
@@ -40,16 +63,16 @@
     <title>AddressBook</title>
   </head>
   <body>
-  <h2 id="welcome">Welcome to addressBook</h2>
+  <h2 id="welcome">Добро пожаловать в приложение "Адресная книга"</h2>
   </br>
   <div id="message">${messageInfo}</div>
   <table id="tableContent" border="3">
     <tr id="head">
-    <td >Username</td>
+    <td >Имя</td>
     <td>E-mail</td>
-    <td>Address</td>
-    <td>Phone</td>
-    <td colspan="2">Actions</td>
+    <td>Адрес</td>
+    <td>Телефон</td>
+    <td colspan="2">Действия</td>
     </tr>
 
     <c:forEach items="${users}" var="person">
@@ -58,13 +81,14 @@
         <td><c:out value="${person.email}" /></td>
         <td><c:out value="${person.address}" /></td>
         <td><c:out value="${person.phone}" /></td>
-        <td><form method="post" action="/updateUser"><input type="hidden" name="id" value="${person.id}"><input type="submit" value="EDIT"/></form></td>
-        <td><form method="post" action="/deleteUser"><input type="hidden" name="id" value="${person.id}"><input type="submit" value="DELETE"/></form></td>
+        <td><form method="post" action="/updateUser"><input class="hiddens" size="0" type="hidden" name="id" value="${person.id}"><input class="buttons" type="submit" value="Изменить"/></form></td>
+        <td><form method="post" action="/deleteUser"><input class="hiddens" type="hidden" name="id" value="${person.id}"><input class="buttons" type="submit" value="Удалить"/></form></td>
       </tr>
     </c:forEach>
   </table>
 
-  <button onclick="window.location='j_spring_security_logout'">Logout</button></a>
-  <button onclick="window.location='/addUser'">Add note</button></a>
+
+  <button id="addButon"onclick="window.location='/addUser'">Добавить новую запись в книгу</button></a>
+  <button id="logout" onclick="window.location='j_spring_security_logout'">Выйти</button></a>
   </body>
 </html>

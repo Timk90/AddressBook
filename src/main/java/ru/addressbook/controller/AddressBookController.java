@@ -1,21 +1,20 @@
 package main.java.ru.addressbook.controller;
 
-import main.java.ru.addressbook.mapper.User;
-import main.java.ru.addressbook.service.AddressBookServiceImp;
-import main.java.ru.addressbook.validator.UserValidator;
+import main.java.ru.addressbook.bean.User;
+import main.java.ru.addressbook.service.AddressBookService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.Validator;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -25,58 +24,12 @@ import java.util.List;
 public class AddressBookController {
 
     @Autowired
-    private User user;
-
-    @ModelAttribute("user")
-    public User createUser(){
-        return new User();
-    }
-
-    @Autowired
-    AddressBookServiceImp dbService;
-    //private final static org.slf4j.Logger logger = LoggerFactory.getLogger(BaseController.class);
-
-    @Autowired
-    @Qualifier("myValidator")
-    private Validator validator;
-
-    @InitBinder
-    private void initBinder(WebDataBinder binder) {
-        binder.setValidator(validator);
-    }
-
-    @RequestMapping(value = {"/", "/welcome"}, method = RequestMethod.GET)
-    public ModelAndView welcome() {
-        ModelAndView model = new ModelAndView("welcome");
-        //model.addObject("user", new User());
-        return model;
-    }
-
-    @RequestMapping(value = {"/login**"}, method = RequestMethod.GET)
-    public ModelAndView login(
-            @RequestParam(value = "error", required = false) String error,
-            @RequestParam(value = "logout", required = false) String logout,
-            SessionStatus status) {
-
-        ModelAndView model = new ModelAndView("login");
-        model.addObject("user", new User());
-
-        if(error != null){
-            model.addObject("error", "Invalid username and password!");
-        }
-
-        if(logout != null){
-            model.addObject("logout", "You have logged out!");
-            status.isComplete();
-        }
-
-        return model;
-    }
+    AddressBookService service;
 
     @RequestMapping(value = {"/AddressBook**"}, method = RequestMethod.GET)
     public ModelAndView index() {
         ModelAndView model = new ModelAndView("index");
-        List<User> users = dbService.selectAllUsers();
+        List<User> users = service.findAll();
         model.addObject("users", users);
         return model;
     }
@@ -87,54 +40,31 @@ public class AddressBookController {
         String name = authentication.getName();
         ModelAndView model = new ModelAndView("indexUsers");
         model.addObject("AuthorizedUser", name);
-        List<User> authorizedUser = dbService.findUserByUsername(name);
+        List<User> authorizedUser = service.findUserByUsername(name);
+
+        Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+        if(authorities.contains(new SimpleGrantedAuthority("ROLE_ADMIN"))){
+            model.addObject("authority", "admin");
+            //model.setViewName("/AddressBook");
+        }
+
         model.addObject("AuthorizedUserID", authorizedUser.get(0).getId());
         model.addObject("roles", authentication.getAuthorities());
-        List<User> users = dbService.selectAllUsers();
+
+        List<User> users = service.findAll();
         model.addObject("users", users);
         return model;
     }
 
-    @RequestMapping(value = {"/registration"}, method = RequestMethod.GET)
-    public ModelAndView registration() {
-        ModelAndView model = new ModelAndView("registration");
-        User user = new User();
-        user.setEnabled(Short.parseShort("1"));
-        user.setMessage("Registration");
-        model.addObject("user", user);
-        //model.addObject("message", "Registration");
-        return model;
-    }
-
-    @RequestMapping(value = {"/addUser"}, method = RequestMethod.GET)
-    public ModelAndView addUser() {
-
-        ModelAndView model = new ModelAndView("registration");
-        User user = new User();
-        user.setMessage("Add new user");
-        model.addObject("user", user);
-        //model.addObject("message", "Add new user");
-        return model;
-    }
 
     @RequestMapping(value = {"/deleteUser**"}, method = RequestMethod.POST)
     public ModelAndView deleteUser(@RequestParam(value = "id", required = false) int id) {
-        dbService.deleteUserByID(id);
+        service.deleteUserById(id);
         ModelAndView model = new ModelAndView();
-        model.addObject("messageInfo", "User was successfully deleted");
-        List<User> users = dbService.selectAllUsers();
+        model.addObject("messageInfo", "Запись успешно удалена из книги");
+        List<User> users = service.findAll();
         model.addObject("users", users);
         model.setViewName("index");
-        return model;
-    }
-
-    @RequestMapping(value = {"/updateUser**"}, method = RequestMethod.POST)
-    public ModelAndView updateUser(@RequestParam(value = "id", required = false) int id) {
-        User user = dbService.findUserByID(id);
-        ModelAndView model = new ModelAndView("registration");
-        user.setMessage("Update user");
-        model.addObject("user", user);
-        //model.addObject("message", "Update user");
         return model;
     }
 
@@ -145,40 +75,6 @@ public class AddressBookController {
 //        ModelAndView model = new ModelAndView("login");
 //        return model;
 //    }
-
-    @RequestMapping(value = {"/checkForm"}, method = RequestMethod.POST)
-    public ModelAndView checkForm(@ModelAttribute("user") @Validated User user,
-                                  BindingResult result
-                                  ) {
-        ModelAndView model = new ModelAndView();
-        if(result.hasErrors()){
-            model.setViewName("registration");
-            user.setEnabled(Short.parseShort("1"));
-        }else{
-            if(user.getId() > 0){
-                dbService.updateUserInfo(user);
-                model.addObject("messageInfo", "User was successfully updated");
-            }else{
-                dbService.addUser(user);
-                model.addObject("messageInfo", "New User was successfully Added");
-            }
-
-            if(user.getMessage().equals("Registration")){
-                model.addObject("messageInfo", "New User was successfully registered");
-                model.setViewName("welcome");
-            }else {
-                model.setViewName("index");
-            }
-            List<User> users = dbService.selectAllUsers();
-            model.addObject("users", users);
-        }
-        return model;
-    }
-
-    @RequestMapping(value = {"/checkForm"}, method = RequestMethod.GET)
-    public String checkForm(){
-        return "welcome";
-    }
 
 
 }

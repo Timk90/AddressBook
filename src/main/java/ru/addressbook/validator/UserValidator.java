@@ -1,12 +1,14 @@
 package main.java.ru.addressbook.validator;
 
-import main.java.ru.addressbook.mapper.User;
-import main.java.ru.addressbook.service.AddressBookServiceImp;
+import main.java.ru.addressbook.bean.User;
+import main.java.ru.addressbook.service.AddressBookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by Tim on 09.08.2017.
@@ -14,7 +16,10 @@ import java.util.List;
 public class UserValidator implements org.springframework.validation.Validator{
 
     @Autowired
-    private AddressBookServiceImp service;
+    private AddressBookService service;
+
+    private static final String EMAIL_PATTERN =
+            "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 
     @Override
     public boolean supports(Class<?> aClass) {
@@ -43,5 +48,19 @@ public class UserValidator implements org.springframework.validation.Validator{
         if (!user.getConfirmationPassword().equals(user.getPassword())) {
             errors.rejectValue("confirmationPassword", "Diff.userForm.passwordConfirm");
         }
+
+        if (!emailValidation(user.getEmail())){
+            errors.rejectValue("email", "User.emeail.not.valid");
+        }
+
     }
+
+    boolean emailValidation(String email){
+        boolean valid = false;
+        Pattern pattern = Pattern.compile(EMAIL_PATTERN);
+        Matcher match = pattern.matcher(email);
+        valid =  match.matches();
+        return valid;
+    }
+
 }

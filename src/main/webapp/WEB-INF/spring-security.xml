@@ -12,7 +12,7 @@
         <intercept-url pattern="/AddressBook**" access="ROLE_ADMIN"/>
         <form-login
                 login-page="/login"
-                default-target-url="/AddressBook"
+                default-target-url="/AddressBookUser"
                 username-parameter="username"
                 password-parameter="password"
                 authentication-failure-url="/login?error"

@@ -1,10 +1,17 @@
 package main.java.ru.addressbook.DBhelp;
 
-import main.java.ru.addressbook.mapper.User;
+import main.java.ru.addressbook.bean.User;
+import main.java.ru.addressbook.bean.UserRole;
+import main.java.ru.addressbook.mapper.UserMapper;
 import main.java.ru.addressbook.service.AddressBookService;
 import main.java.ru.addressbook.service.AddressBookServiceImp;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 
 import java.sql.*;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 
@@ -13,13 +20,12 @@ import java.util.Properties;
  */
 public class DBhelper {
 
-    AddressBookService addressBookService;
     static Connection con;
 
     static String url = "jdbc:postgresql://localhost:5432/AddressBook";
-    static String driver = "org.postgresql.Driver";
-    static String username = "Admin";
-    static String password = "root1234";
+    static String driverClassManager = "org.postgresql.Driver";
+    static String username = "jdbc.username";
+    static String password = "jdbc.password";
 
     public static void createTableClients(){
         Statement stmt0 = null;
@@ -264,23 +270,55 @@ public class DBhelper {
         }
     }
 
+//    @Autowired
+//    AddressBookServiceImp service;
+
     public static void main(String[] args) {
-       DBhelper.createTableClients();
-       AddressBookServiceImp adr = new AddressBookServiceImp();
-       //System.out.println(adr.selectAllUsers());
-        //System.out.println(adr.findUserByID(2));
-        //adr.deleteUserByID(2);
-//        System.out.println(adr.findUserByUsername("Tim"));
+
+        ApplicationContext cxt = new ClassPathXmlApplicationContext("main/webapp/WEB-INF/dispatcher-servlet.xml");
+        AddressBookServiceImp service = (AddressBookServiceImp) cxt.getBean("service");
+
+       //DBhelper.createTableClients();
+
+       //UserMapperImp adr = new UserMapperImp();
+       //System.out.println(adr.findAll());
+        //System.out.println(adr.findById(2));
+        //adr.deleteById(2);
+//        System.out.println(adr.findByName("Tim"));
         System.out.println("-------Select ALL users-----------");
-        List<User> users = adr.selectAllUsers();
-        for(User user : users){
-            System.out.print(user.toString());
+        DBhelper dBhelper = new DBhelper();
+        User user = new User();
+        user.setName("Bobon");
+        user.setPassword("bobon1234");
+        user.setAddress("Saratov");
+        user.setEmail("lskw@kdslwdk.com");
+        user.setEnabled(Short.parseShort(""+1));
+        user.setPhone("78738947392");
+        user.setMessage("new user");
+        user.setRoles(Arrays.asList("ROLE_ADMIN","ROLE_USER"));
+
+        //service.insert(user);
+        System.out.println("added");
+
+        List<User> users = service.findAll();
+        System.out.println("end  of the search");
+        for(User tmpUser : users){
+            System.out.print(tmpUser.toString());
             System.out.println();
         }
         System.out.println();
+
+        List<UserRole> userRoles = service.getUserRoles("Glinka");
+        for(UserRole tmpUser : userRoles){
+            System.out.print("Username: " + tmpUser.getName() + ", Role: "+tmpUser.getRole());
+            System.out.println();
+        }
+        System.out.println();
+
+
         //DBhelper.security("Tim");
         //DBhelper.security("Tim");
         //DBhelper.security("Popa");
-        DBhelper.showTableRoles();
+        //DBhelper.showTableRoles();
     }
 }

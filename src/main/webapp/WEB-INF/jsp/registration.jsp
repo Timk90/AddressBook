@@ -7,7 +7,7 @@
   Time: 19:01
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <html>
 <style>
     span.error{
@@ -28,17 +28,17 @@
    <h2>${user.message}</h2>
  <table>
      <tr>
-         <td>Username:</td>
+         <td>Имя (Логин):</td>
          <td><form:input path="name"></form:input></td>
          <td><span class="error"><form:errors path="name"></form:errors></span></td>
      </tr>
      <tr>
-         <td>Password:</td>
+         <td>Пароль:</td>
          <td><form:input path="password"></form:input></td>
          <td><span class="error"><form:errors path="password"></form:errors></span></td>
      </tr>
      <tr>
-         <td>Confiramtion password:</td>
+         <td>Подтверждение пароля:</td>
          <td><form:input path="confirmationPassword"></form:input></td>
          <td><span class="error"><form:errors path="confirmationPassword"></form:errors></span></td>
      </tr>
@@ -48,17 +48,17 @@
          <td><span class="error"><form:errors path="email"></form:errors></span></td>
      </tr>
      <tr>
-         <td>Address:</td>
-         <td><form:input path="address"></form:input></td>
+         <td>Адрес:</td>
+         <td><form:textarea path="address"></form:textarea></td>
          <td><span class="error"><form:errors path="address"></form:errors></span></td>
      </tr>
      <tr>
-         <td>Phone number:</td>
+         <td>Телефон:</td>
          <td><form:input path="phone"></form:input></td>
          <td><span class="error"><form:errors path="phone"></form:errors></span></td>
      </tr>
      <tr>
-         <td><input type="submit" value="Save"/></td>
+         <td><input type="submit" value="Сохранить"/></td>
      </tr>
  </table>
         <form:hidden path="id"></form:hidden>

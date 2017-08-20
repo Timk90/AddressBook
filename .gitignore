@@ -34,8 +34,8 @@ packages/
 #idea files
 .idea
 out
-target
 *.jar
+lib*
 
 #iml files
 *.iml
