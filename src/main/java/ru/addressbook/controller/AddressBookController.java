@@ -1,7 +1,10 @@
 package main.java.ru.addressbook.controller;
 
+import ch.qos.logback.classic.Logger;
 import main.java.ru.addressbook.bean.User;
 import main.java.ru.addressbook.service.AddressBookService;
+import org.slf4j.*;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -27,13 +30,16 @@ public class AddressBookController {
     @Autowired
     AddressBookService service;
 
-    private final Logger logger = LoggerFactory.
+    private final Logger logger = (Logger)LoggerFactory.getLogger(AddressBookController.class);
 
     @RequestMapping(value = {"/AddressBook**"}, method = RequestMethod.GET)
     public ModelAndView index() {
         ModelAndView model = new ModelAndView("index");
         List<User> users = service.findAll();
         model.addObject("users", users);
+        logger.info("Usual step...");
+        logger.debug("Dangerous");
+
         return model;
     }
 
