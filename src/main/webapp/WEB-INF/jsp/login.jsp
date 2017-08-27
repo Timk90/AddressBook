@@ -30,9 +30,14 @@
 </style>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap core CSS -->
+    <link href="../../../../dist/css/bootstrap.min.css" rel="stylesheet">
+
     <title>Login</title>
 </head>
 <body>
+<div class="container" style="alignment: center">
 <%--Информация о пользователе--%>
 <%--${logged.authenticated}<br>--%>
 <%--${logged.name}<br>--%>
@@ -67,7 +72,8 @@
         <tr>
             <td></td>
             <td align="left">
-                <input type=submit value="Login">
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Войти</button>
+                <%--<input type=submit value="Login">--%>
                 <a href="/welcome">Домашня страница</a>
             </td>
         </tr>
@@ -102,5 +108,10 @@
     <b id="caution">ВНИМАНИЕ</b>: перед тестированием демо необходимо создать БД с именем "AddressBook", а также пользователя Admin c паролем: root1234.
     Инициализация таблиц происходит автоматически.
 </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+
 </body>
 </html>

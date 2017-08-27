@@ -17,6 +17,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+
 /**
  * Created by Tim on 09.08.2017.
  */
@@ -25,6 +26,8 @@ public class AddressBookController {
 
     @Autowired
     AddressBookService service;
+
+    private final Logger logger = LoggerFactory.
 
     @RequestMapping(value = {"/AddressBook**"}, method = RequestMethod.GET)
     public ModelAndView index() {
