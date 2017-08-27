@@ -16,54 +16,93 @@
 
 </style>
 <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+
 <title>${user.message}</title>
 </head>
 <body>
-<form:form modelAttribute="user" action="/checkForm" commandName="user">
+<div class="container">
+<form:form modelAttribute="user" action="/checkForm" commandName="user" cssClass="">
     <%--Validation should be placed after form sending--%>
     <%--<c:choose >--%>
         <%--<c:when test="${message} == ''"><h2>Just user Info</h2></c:when>--%>
         <%--<c:otherwise ><h2>${message}</h2></c:otherwise>--%>
     <%--</c:choose>--%>
    <h2>${user.message}</h2>
- <table>
-     <tr>
-         <td>Имя (Логин):</td>
-         <td><form:input path="name"></form:input></td>
-         <td><span class="error"><form:errors path="name"></form:errors></span></td>
-     </tr>
-     <tr>
-         <td>Пароль:</td>
-         <td><form:input path="password"></form:input></td>
-         <td><span class="error"><form:errors path="password"></form:errors></span></td>
-     </tr>
-     <tr>
-         <td>Подтверждение пароля:</td>
-         <td><form:input path="confirmationPassword"></form:input></td>
-         <td><span class="error"><form:errors path="confirmationPassword"></form:errors></span></td>
-     </tr>
-     <tr>
-         <td>E-mail:</td>
-         <td><form:input path="email"></form:input></td>
-         <td><span class="error"><form:errors path="email"></form:errors></span></td>
-     </tr>
-     <tr>
-         <td>Адрес:</td>
-         <td><form:textarea path="address"></form:textarea></td>
-         <td><span class="error"><form:errors path="address"></form:errors></span></td>
-     </tr>
-     <tr>
-         <td>Телефон:</td>
-         <td><form:input path="phone"></form:input></td>
-         <td><span class="error"><form:errors path="phone"></form:errors></span></td>
-     </tr>
-     <tr>
-         <td><input type="submit" value="Сохранить"/></td>
-     </tr>
- </table>
+
+     <div class="form-group row">
+         <label for="inputLogin" class="col-sm-2 col-form-label">Логин</label>
+         <div class="col-sm-10" >
+                 <form:input path="name" id="inputLogin" cssClass="form-control"></form:input >
+         </div>
+         <div class="col-sm-10">
+             <span class="error"><form:errors path="name" cssStyle="color: red; text-align: right;"></form:errors></span>
+         </div >
+     </div>
+
+    <div class="form-group row">
+        <label for="inputPassword" class="col-sm-2 col-form-label">Пароль</label>
+        <div class="col-sm-10" >
+                <form:input path="password" id="inputPassword" cssClass="form-control"></form:input>
+        </div>
+        <div class="col-sm-10">
+             <span class="error"><form:errors path="password" cssStyle="color: red; text-align: right;"></form:errors></span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="inputPasswordConf" class="col-sm-2 col-form-label">Подтверждение пароля</label>
+        <div class="col-sm-10" >
+                <form:input path="confirmationPassword" id="inputPasswordConf" cssClass="form-control"></form:input>
+        </div>
+         <div class="col-sm-10">
+             <span class="error"><form:errors path="confirmationPassword" cssStyle="color: red; text-align: right;"></form:errors></span>
+         </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="inputEmail" class="col-sm-2 col-form-label">E-mail:</label>
+        <div class="col-sm-10" >
+                <form:input path="email" id="inputEmail" cssClass="form-control "></form:input>
+        </div>
+        <div class="col-sm-10">
+            <span class="error"><form:errors path="email" cssStyle="color: red; text-align: right;" ></form:errors></span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="inputAddress" class="col-sm-2 col-form-label">Адрес</label>
+        <div class="col-sm-10" >
+                <form:textarea path="address" id="inputAddress" cssClass="form-control"></form:textarea>
+        </div>
+        <div class="col-sm-10">
+         <span class="error"><form:errors path="address" cssStyle="color: red; text-align: right;" ></form:errors></span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="inputPhone" class="col-sm-2 col-form-label">Телефон</label>
+        <div class="col-sm-10" >
+                <form:input path="phone" id="inputPhone" cssClass="form-control"></form:input>
+        </div>
+        <div class="col-sm-10">
+            <span class="error"><form:errors path="phone" cssStyle="color: red; text-align: right;"></form:errors></span>
+        </div>
+    </div>
+    <div>
+        <input class="btn btn-lg btn-primary btn-block"  type="submit" value="Сохранить"/>
+    </div>
+
         <form:hidden path="id"></form:hidden>
         <form:hidden path="enabled"></form:hidden>
         <form:hidden path="message"></form:hidden>
 </form:form>
+    <button class="btn btn-lg btn-primary btn-block"  onclick="window.location='/AddressBookUser'" >Назад</button>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+
 </body>
 </html>

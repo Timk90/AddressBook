@@ -35,7 +35,7 @@ VALUES ('Владимир', '1234вова', 'vovka@mail.ru', 'Россия, Ха
 INSERT INTO user_roles (NAME, ROLE) VALUES ('Владимир', 'ROLE_USER');
 
 INSERT INTO users (NAME, password, email, address, phone, enabled)
-VALUES ('Индира', '1234индирыч', 'indira@mail.ru', 'Россия, Ленинград', '8939021629', 1);
+VALUES ('Попадыра', '1234индирыч', 'indira@mail.ru', 'Россия, Ленинград', '8939021629', 1);
 INSERT INTO user_roles (NAME, ROLE) VALUES ('Владимир', 'ROLE_USER');
 
 

@@ -32,12 +32,12 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap core CSS -->
-    <link href="../../../../dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 
     <title>Login</title>
 </head>
 <body>
-<div class="container" style="alignment: center">
+<div class="container" style="alignment: center; text-align: center">
 <%--Информация о пользователе--%>
 <%--${logged.authenticated}<br>--%>
 <%--${logged.name}<br>--%>
@@ -45,20 +45,16 @@
 <%--${logged.details}<br>--%>
 <%--${logged.principal}<br>--%>
 <%--${logged.toString()}<br>--%>
-<form action="<c:url value='j_spring_security_check' />" method="post">
+<form action="<c:url value='j_spring_security_check' />" class="form-signin" method="post">
+    <div style="alignment: center"><h2>Пожалуйста, авторизуйтесь в системе</h2></div>
     <table align="center">
-        <tr>
-            <td colspan="2" id="message">
-            ${logout}
-            ${error}
-            </td>
-        </tr>
+
         <tr>
             <td>
                 Логин:
             </td>
             <td>
-                <input type="text" name="username" />
+                <input class="form-control" type="text" name="username" placeholder="Введите логин"/>
             </td>
         </tr>
         <tr>
@@ -66,7 +62,7 @@
                 Пароль:
             </td>
             <td>
-                <input type="password" name="password" />
+                <input  class="form-control"  type="password" name="password" placeholder="Введите пароль" />
             </td>
         </tr>
         <tr>
@@ -88,6 +84,10 @@
         </tr>
     </table>
 
+    <div style="color: #f76565; alignment: center; font-size: 13pt; font-weight: bold; text-align: center;">
+        ${logout}
+        ${error}
+    </div>
 
 </form>
 <table align="center">
@@ -109,6 +109,7 @@
     Инициализация таблиц происходит автоматически.
 </div>
 </div>
+
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>

@@ -60,35 +60,49 @@
 
 <html>
   <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+
     <title>AddressBook</title>
   </head>
   <body>
-  <h2 id="welcome">Добро пожаловать в приложение "Адресная книга"</h2>
+  <div class="container">
+  <h2 style="color: #27b533; text-align: center;">Добро пожаловать в приложение "Адресная книга"</h2>
   </br>
   <div id="message">${messageInfo}</div>
-  <table id="tableContent" border="3">
-    <tr id="head">
-    <td >Имя</td>
-    <td>E-mail</td>
-    <td>Адрес</td>
-    <td>Телефон</td>
-    <td colspan="2">Действия</td>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+    <th >Имя</th>
+    <th>E-mail</th>
+    <th>Адрес</th>
+    <th>Телефон</th>
+    <th colspan="2">Действия</th>
     </tr>
-
+    </thead>
     <c:forEach items="${users}" var="person">
       <tr>
         <td><c:out value="${person.name}" /></td>
         <td><c:out value="${person.email}" /></td>
         <td><c:out value="${person.address}" /></td>
         <td><c:out value="${person.phone}" /></td>
-        <td><form method="post" action="/updateUser"><input class="hiddens" size="0" type="hidden" name="id" value="${person.id}"><input class="buttons" type="submit" value="Изменить"/></form></td>
-        <td><form method="post" action="/deleteUser"><input class="hiddens" type="hidden" name="id" value="${person.id}"><input class="buttons" type="submit" value="Удалить"/></form></td>
+        <td><form method="post" action="/updateUser"><input class="hiddens" size="0" type="hidden" name="id" value="${person.id}"><input class="btn btn-primary" type="submit" value="Изменить"/></form></td>
+        <td><form method="post" action="/deleteUser"><input class="hiddens" type="hidden" name="id" value="${person.id}"><input class="btn btn-primary" type="submit" value="Удалить"/></form></td>
       </tr>
     </c:forEach>
   </table>
 
 
-  <button id="addButon"onclick="window.location='/addUser'">Добавить новую запись в книгу</button></a>
-  <button id="logout" onclick="window.location='j_spring_security_logout'">Выйти</button></a>
+  <button  class="btn btn-primary"  onclick="window.location='/addUser'">Добавить новую запись в книгу</button>
+  <button class="btn btn-primary"  onclick="window.location='/AddressBookUser'" >Назад</button>
+  <button  class="btn btn-primary"  onclick="window.location='j_spring_security_logout'">Выйти</button>
+
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+
   </body>
 </html>
