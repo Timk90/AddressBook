@@ -1,6 +1,7 @@
 package main.java.ru.addressbook.controller;
 
 import main.java.ru.addressbook.bean.User;
+import main.java.ru.addressbook.config.LoggingConfig;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -22,10 +23,12 @@ public class AddressBookWelcomeController {
     }
     //private final static org.slf4j.Logger logger = LoggerFactory.getLogger(BaseController.class);
 
+    //static{System.setProperty("logback.configurationFile","main/resources/logging/logback.xml");}
 
     @RequestMapping(value = {"/", "/welcome"}, method = RequestMethod.GET)
     public ModelAndView welcome() {
 
+        LoggingConfig.config();
 
         ModelAndView model = new ModelAndView("welcome");
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();

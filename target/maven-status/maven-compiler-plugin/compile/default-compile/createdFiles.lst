@@ -1,0 +1,13 @@
+main\java\ru\addressbook\DBhelp\DBhelper.class
+main\java\ru\addressbook\config\LoggingConfig.class
+main\java\ru\addressbook\bean\UserRole.class
+main\java\ru\addressbook\mapper\UserRoleMapper.class
+main\java\ru\addressbook\controller\AddressBookController.class
+main\java\ru\addressbook\service\AddressBookServiceImp.class
+main\java\ru\addressbook\validator\UserValidator.class
+main\java\ru\addressbook\controller\AddressBookWelcomeController.class
+main\java\ru\addressbook\service\AddressBookService.class
+main\java\ru\addressbook\bean\User.class
+main\java\ru\addressbook\mapper\UserMapper.class
+main\java\ru\addressbook\controller\AddressBookLoginController.class
+main\java\ru\addressbook\controller\AddressBookRegistrationController.class

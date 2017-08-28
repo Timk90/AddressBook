@@ -1,6 +1,8 @@
 package main.java.ru.addressbook.controller;
 
 import ch.qos.logback.classic.Logger;
+import ch.qos.logback.classic.LoggerContext;
+import ch.qos.logback.core.util.StatusPrinter;
 import main.java.ru.addressbook.bean.User;
 import main.java.ru.addressbook.service.AddressBookService;
 import org.slf4j.*;
@@ -32,13 +34,21 @@ public class AddressBookController {
 
     private final Logger logger = (Logger)LoggerFactory.getLogger(AddressBookController.class);
 
+    LoggerContext lc = (LoggerContext) LoggerFactory.getILoggerFactory();
+
+
     @RequestMapping(value = {"/AddressBook**"}, method = RequestMethod.GET)
     public ModelAndView index() {
         ModelAndView model = new ModelAndView("index");
         List<User> users = service.findAll();
         model.addObject("users", users);
+
+//        System.setProperty("logback.configurationFile","C:\\Users\\Tim\\git\\AddressBook\\target\\addresBook-1.0\\WEB-INF\\classes\\main\\resources\\logging\\logback.xml");
+
         logger.info("Usual step...");
         logger.debug("Dangerous");
+        StatusPrinter.print(lc);
+
 
         return model;
     }
