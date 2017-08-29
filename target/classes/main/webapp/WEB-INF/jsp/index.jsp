@@ -74,7 +74,7 @@
   <table class="table table-striped">
     <thead>
     <tr>
-    <th >�?мя</th>
+    <th >Имя</th>
     <th>E-mail</th>
     <th>Адрес</th>
     <th>Телефон</th>
@@ -87,7 +87,7 @@
         <td><c:out value="${person.email}" /></td>
         <td><c:out value="${person.address}" /></td>
         <td><c:out value="${person.phone}" /></td>
-        <td><form method="post" action="/updateUser"><input class="hiddens" size="0" type="hidden" name="id" value="${person.id}"><input class="btn btn-primary" type="submit" value="�?зменить"/></form></td>
+        <td><form method="post" action="/updateUser"><input class="hiddens" size="0" type="hidden" name="id" value="${person.id}"><input class="btn btn-primary" type="submit" value="Изменить"/></form></td>
         <td><form method="post" action="/deleteUser"><input class="hiddens" type="hidden" name="id" value="${person.id}"><input class="btn btn-primary" type="submit" value="Удалить"/></form></td>
       </tr>
     </c:forEach>

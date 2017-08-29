@@ -9,17 +9,27 @@
     </appender>
 
     <appender name="FILE" class="ch.qos.logback.core.FileAppender">
-        <!--<file>C:\Users\Tim\git\AddressBook\Logs.%d{yyyy-MM-dd_HH-mm}.log</file>-->
-        <file>C:\\Users\\Tim\\git\\AddressBook\\logs.log</file>
+        <file>C:\Users\Tim\git\AddressBook\\Logs.%d{yyyy-MM-dd_HH-mm}.log</file>
+        <!--<file>C:\\Users\\Tim\\git\\AddressBook\\logs.log</file>-->
         <append>true</append>
         <immediateFlush>true</immediateFlush>
         <encoder>
             <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
-            <!--<maxHistory>30</maxHistory>-->
+            <maxHistory>30</maxHistory>
         </encoder>
     </appender>
 
-    <logger name="ru.timur.addressbook.foo" level="INFO" additivity="false">
+    <logger name="main.java.ru.addressbook.controller" level="INFO" additivity="false">
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="FILE" />
+    </logger>
+
+    <logger name="main.java.ru.addressbook.mapper" level="debug" additivity="false">
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="FILE" />
+    </logger>
+
+    <logger name="main.java.ru.addressbook.service" level="ERROR" additivity="false">
         <appender-ref ref="STDOUT" />
         <appender-ref ref="FILE" />
     </logger>
@@ -28,7 +38,6 @@
     <root level="DEBUG">
         <appender-ref ref="FILE" />
         <appender-ref ref="STDOUT" />
-
     </root>
 
 </configuration>

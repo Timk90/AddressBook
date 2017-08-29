@@ -8,7 +8,6 @@
        xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
        xmlns:tx="http://www.springframework.org/schema/tx"
 
-
        xsi:schemaLocation="http://www.springframework.org/schema/mvc
        http://www.springframework.org/schema/mvc/spring-mvc.xsd
        http://www.springframework.org/schema/beans
@@ -94,10 +93,18 @@
         <constructor-arg index="0" ref="sqlSessionFactory" />
     </bean>
 
-    <jdbc:initialize-database data-source="dataSource" >
-        <!--Не работает создание таблицы -->
-        <!--<jdbc:script encoding="UTF-8" location="classpath:/main/resources/sql/create-db.sql"/>-->
-        <jdbc:script encoding="UTF-8" location="classpath:/main/resources/sql/scheme.sql"/>
-    </jdbc:initialize-database>
+    <!--this should be use instead of plagin when liquibase was downloaded-->
+    <!--<bean id="liquibase" class="liquibase.integration.spring.SpringLiquibase">-->
+        <!--<property name="dataSource" ref="myDataSource" />-->
+        <!--<property name="changeLog" value="classpath:/changelog.xml" />-->
+        <!--&lt;!&ndash;contexts specifies the runtime contexts to use.&ndash;&gt;-->
+        <!--<property name="contexts" value="test, production" />-->
+    <!--</bean>-->
+
+    <!--<jdbc:initialize-database data-source="dataSource" >-->
+        <!--&lt;!&ndash;Не работает создание таблицы &ndash;&gt;-->
+        <!--&lt;!&ndash;<jdbc:script encoding="UTF-8" location="classpath:/main/resources/sql/create-db.sql"/>&ndash;&gt;-->
+        <!--<jdbc:script encoding="UTF-8" location="classpath:/main/resources/sql/scheme.sql"/>-->
+    <!--</jdbc:initialize-database>-->
 
 </beans>

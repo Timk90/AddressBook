@@ -1,7 +1,9 @@
 package main.java.ru.addressbook.controller;
 
+import ch.qos.logback.classic.Logger;
 import main.java.ru.addressbook.bean.User;
 import main.java.ru.addressbook.service.AddressBookService;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -20,6 +22,7 @@ import java.util.List;
 @Controller
 public class AddressBookRegistrationController {
 
+    private final Logger logger = (Logger) LoggerFactory.getLogger(AddressBookController.class);
 
     @Autowired
     AddressBookService service;
@@ -41,6 +44,7 @@ public class AddressBookRegistrationController {
         user.setMessage("Регистрация");
         model.addObject("user", user);
         //model.addObject("message", "Registration");
+        logger.debug("registration process...");
         return model;
     }
 
@@ -63,18 +67,22 @@ public class AddressBookRegistrationController {
         if(result.hasErrors()){
             model.setViewName("registration");
             user.setEnabled(Short.parseShort("1"));
+            logger.error("error filling the form");
         }else{
             if(user.getId() > 0){
                 service.update(user);
                 model.addObject("messageInfo", "Данные были успешно отредактированы");
+                logger.info("registration");
             }else{
                 service.insert(user);
                 model.addObject("messageInfo", "Новая запись была добавлена в книгу");
+                logger.info("adding new record");
             }
 
             if(user.getMessage().equals("Регистрация")){
                 model.addObject("messageInfo", "Новый пользователь был успешно зарегистрирован");
                 model.setViewName("welcome");
+                logger.info("registration success");
             }else {
                 model.setViewName("index");
             }

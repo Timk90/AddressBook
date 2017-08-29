@@ -1,0 +1,87 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <!--DROP TABLE IF EXISTS users CASCADE;-->
+    <!--DROP TABLE IF EXISTS user_roles CASCADE;-->
+
+    <!--CREATE TABLE IF NOT EXISTS users-->
+    <!--(ID SERIAL PRIMARY KEY,-->
+    <!--name           TEXT    NOT NULL UNIQUE,-->
+    <!--password       TEXT    NOT NULL,-->
+    <!--email          TEXT,-->
+    <!--address        TEXT,-->
+    <!--phone          TEXT,-->
+    <!--enabled        SMALLINT NOT NULL DEFAULT '1');-->
+
+    <!--CREATE TABLE IF NOT EXISTS user_roles-->
+    <!--(ID         SERIAL  PRIMARY KEY ,-->
+    <!--name        TEXT    NOT NULL,-->
+    <!--role        TEXT    NOT NULL,-->
+    <!--FOREIGN KEY (name) REFERENCES users (name));-->
+
+    <!--<changeSet id="drop_users_and_roles" author="timur" runAlways="true">-->
+        <!--<dropTable tableName="users" cascadeConstraints="true" />-->
+        <!--<dropTable tableName="user_roles" cascadeConstraints="true" />-->
+    <!--</changeSet>-->
+
+    <changeSet id="delete_tables" author="timur" runAlways="true">
+        <sql>DROP TABLE IF EXISTS users CASCADE;</sql>
+        <sql>DROP TABLE IF EXISTS user_roles CASCADE;</sql>
+    </changeSet>
+
+    <changeSet id="create_users" author="timur" runAlways="true">
+        <createTable tableName="users" >
+            <column name="ID" type="SERIAL" >
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="NAME" type="TEXT">
+                <constraints nullable="false"  unique="true"/>
+            </column>
+            <column name="PASSWORD" type="TEXT">
+                <constraints nullable="false" />
+            </column>
+            <column name="EMAIL" type="TEXT">
+                <constraints/>
+            </column>
+            <column name="ADDRESS" type="TEXT">
+                <constraints/>
+            </column>
+            <column name="PHONE" type="TEXT">
+                <constraints/>
+            </column>
+            <column name="enabled" type="SMALLINT" defaultValue="1">
+                <constraints nullable="false" />
+            </column>
+
+        </createTable>
+        <!--<rollback>-->
+            <!--<dropTable tableName="users" cascadeConstraints="true" />-->
+        <!--</rollback>-->
+    </changeSet>
+
+    <changeSet id="create_userroles" author="timur" runAlways="true">
+        <createTable tableName="user_roles">
+            <column name="ID" type="SERIAL" >
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="NAME" type="TEXT">
+                <constraints nullable="false"
+                             foreignKeyName="name" referencedTableName="users"
+                             referencedColumnNames="name"/>
+            </column>
+            <column name="ROLE" type="TEXT">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+        <!--<rollback>-->
+            <!--<dropTable tableName="user_roles" cascadeConstraints="true" />-->
+        <!--</rollback>-->
+    </changeSet>
+
+    <changeSet id="tag-1.0" author="timur">
+        <tagDatabase tag="1.0" />
+    </changeSet>
+
+</databaseChangeLog>

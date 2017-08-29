@@ -41,12 +41,8 @@ public class AddressBookController {
         ModelAndView model = new ModelAndView("index");
         List<User> users = service.findAll();
         model.addObject("users", users);
-
-        logger.info("Usual step...");
-        logger.debug("Dangerous");
+        logger.info("Showing addressbook...");
         StatusPrinter.print(lc);
-
-
         return model;
     }
 

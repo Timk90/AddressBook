@@ -21,7 +21,7 @@ public class LoggingConfig {
             InputStream configStream = null;
         try {
 //            ClassLoader classLoader = ClassLoader.getSystemClassLoader();
-//            String path = classLoader.getResource("main/resources/logging/logback.xml").getPath();
+//            String path = classLoader.getResource("main/resources/logging/changelog.xml").getPath();
             configStream = Files.newInputStream(Paths.get("/WEB-INF/classes/main/resources/logging/logback.xml"));
             configurator.setContext(loggerContext);
             configurator.doConfigure(configStream); // loads logback file

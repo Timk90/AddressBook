@@ -1,7 +1,9 @@
 package main.java.ru.addressbook.controller;
 
+import ch.qos.logback.classic.Logger;
 import main.java.ru.addressbook.bean.User;
 import main.java.ru.addressbook.service.AddressBookService;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -18,6 +20,8 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 public class AddressBookLoginController {
+
+    private final Logger logger = (Logger) LoggerFactory.getLogger(AddressBookController.class);
 
     @Autowired
     AddressBookService service;
@@ -45,6 +49,7 @@ public class AddressBookLoginController {
 
         if(error != null){
             model.addObject("error", "Неправильное имя пользователя или пароль!");
+            logger.error("attempt to log-in");
         }
 
         if(logout != null){
