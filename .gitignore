@@ -37,7 +37,7 @@ out
 *.jar
 lib*
 config
-DBhelper
+DBhelp
 target
 
 
