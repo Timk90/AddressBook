@@ -102,7 +102,7 @@ public class AddressBookRegistrationController {
         List<User> users = service.findUserById(id);
         User user = users.get(0);
         ModelAndView model = new ModelAndView("registration");
-        user.setMessage("�?зменить данные");
+        user.setMessage("Изменить данные");
         model.addObject("user", user);
         //model.addObject("message", "Update user");
         return model;

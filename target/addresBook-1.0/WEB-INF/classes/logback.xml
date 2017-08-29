@@ -9,7 +9,7 @@
     </appender>
 
     <appender name="FILE" class="ch.qos.logback.core.FileAppender">
-        <file>C:\Users\Tim\git\AddressBook\\Logs.%d{yyyy-MM-dd_HH-mm}.log</file>
+        <file>C:\Users\Tim\git\AddressBook\\Logs- %d{yyyy-MM-dd_HH:mm:ss} .log</file>
         <!--<file>C:\\Users\\Tim\\git\\AddressBook\\logs.log</file>-->
         <append>true</append>
         <immediateFlush>true</immediateFlush>
