@@ -36,9 +36,10 @@ packages/
 out
 *.jar
 lib*
-#config
-#DBhelper
-#target
+config
+DBhelper
+target
+
 
 #iml files
 *.iml
