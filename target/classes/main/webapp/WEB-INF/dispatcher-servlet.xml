@@ -1,0 +1,103 @@
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xmlns:beans="http://www.springframework.org/schema/c"
+       xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+
+
+       xsi:schemaLocation="http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/mvc/spring-mvc.xsd
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/jdbc
+       http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
+       http://www.springframework.org/schema/security/spring-security-3.1.xsd
+       http://mybatis.org/schema/mybatis-spring
+       http://mybatis.org/schema/mybatis-spring.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx.xsd
+       ">
+
+    <!--<mvc:annotation-driven/>-->
+
+    <context:component-scan base-package="main.java.ru.addressbook"/>
+    <!--<context:annotation-config />-->
+    <!--<mybatis:scan base-package="org.mybatis.spring.sample.mapper" />-->
+    <!--<tx:annotation-driven transaction-manager="transactionManager" />-->
+    <mvc:annotation-driven />
+
+
+    <bean
+            class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix">
+            <value>/WEB-INF/jsp/</value>
+        </property>
+        <property name="suffix">
+            <value>.jsp</value>
+        </property>
+    </bean>
+
+    <bean id="myValidator" class="main.java.ru.addressbook.validator.UserValidator"></bean>
+
+    <!--here we have to put the name of file with messages for validation-->
+    <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <property name="basename">
+            <value>/WEB-INF/classes/main/resources/properties/validation</value>
+        </property>
+        <property name="defaultEncoding" value="UTF-8" />
+    </bean>
+
+    <!-- Database properties file -->
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:main/resources/properties/application.properties</value>
+                <value>classpath:main/resources/properties/logging.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="dataSource"
+          class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="${jdbc.driver}" />
+        <property name="url" value="${jdbc.url}" />
+        <property name="username" value="${jdbc.username}" />
+        <property name="password" value="${jdbc.password}" />
+    </bean>
+
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="configLocation" value="classpath:main/resources/mapper/mybatis-config.xml"/>
+    </bean>
+
+    <bean id="mapper" class="org.mybatis.spring.mapper.MapperFactoryBean" >
+        <property name="mapperInterface" value="main.java.ru.addressbook.mapper.UserMapper" />
+        <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+    </bean>
+
+    <bean id="mapperRole" class="org.mybatis.spring.mapper.MapperFactoryBean" >
+        <property name="mapperInterface" value="main.java.ru.addressbook.mapper.UserRoleMapper" />
+        <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+    </bean>
+
+    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg index="0" ref="sqlSessionFactory" />
+    </bean>
+
+    <jdbc:initialize-database data-source="dataSource" >
+        <!--Не работает создание таблицы -->
+        <!--<jdbc:script encoding="UTF-8" location="classpath:/main/resources/sql/create-db.sql"/>-->
+        <jdbc:script encoding="UTF-8" location="classpath:/main/resources/sql/scheme.sql"/>
+    </jdbc:initialize-database>
+
+</beans>

@@ -16,12 +16,13 @@ public class LoggingConfig {
     public static void config(){
             LoggerContext loggerContext = (LoggerContext) LoggerFactory.getILoggerFactory();
             loggerContext.reset();
+
             JoranConfigurator configurator = new JoranConfigurator();
             InputStream configStream = null;
         try {
-            ClassLoader classLoader = ClassLoader.getSystemClassLoader();
-            String path = classLoader.getResource("logback.xml").getPath();
-            configStream = Files.newInputStream(Paths.get(path));
+//            ClassLoader classLoader = ClassLoader.getSystemClassLoader();
+//            String path = classLoader.getResource("main/resources/logging/logback.xml").getPath();
+            configStream = Files.newInputStream(Paths.get("/WEB-INF/classes/main/resources/logging/logback.xml"));
             configurator.setContext(loggerContext);
             configurator.doConfigure(configStream); // loads logback file
             configStream.close();
@@ -34,7 +35,7 @@ public class LoggingConfig {
 
     public static void main(String[] args) {
         ClassLoader classLoader = ClassLoader.getSystemClassLoader();
-        String path = classLoader.getResource("logback.xml").getPath();
-        System.out.println(path);
+        //String path = classLoader.getResource("Dlogback.configurationFile").getPath();
+        System.out.println("Dlogback.configurationFile");
     }
 }

@@ -28,7 +28,7 @@ public class AddressBookWelcomeController {
     @RequestMapping(value = {"/", "/welcome"}, method = RequestMethod.GET)
     public ModelAndView welcome() {
 
-        LoggingConfig.config();
+        //LoggingConfig.config();
 
         ModelAndView model = new ModelAndView("welcome");
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();

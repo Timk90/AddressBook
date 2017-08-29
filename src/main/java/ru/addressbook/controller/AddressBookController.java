@@ -33,7 +33,6 @@ public class AddressBookController {
     AddressBookService service;
 
     private final Logger logger = (Logger)LoggerFactory.getLogger(AddressBookController.class);
-
     LoggerContext lc = (LoggerContext) LoggerFactory.getILoggerFactory();
 
 
@@ -42,8 +41,6 @@ public class AddressBookController {
         ModelAndView model = new ModelAndView("index");
         List<User> users = service.findAll();
         model.addObject("users", users);
-
-//        System.setProperty("logback.configurationFile","C:\\Users\\Tim\\git\\AddressBook\\target\\addresBook-1.0\\WEB-INF\\classes\\main\\resources\\logging\\logback.xml");
 
         logger.info("Usual step...");
         logger.debug("Dangerous");

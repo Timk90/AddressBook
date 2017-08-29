@@ -17,6 +17,10 @@
             <targetPath>main/resources/</targetPath>
             <filtering>true</filtering>
         </resource>
+        <resource>
+            <directory>src</directory>
+            <filtering>true</filtering>
+        </resource>
     </resources>
         <plugins>
             <plugin>

@@ -58,6 +58,7 @@
         <property name="locations">
             <list>
                 <value>classpath:main/resources/properties/application.properties</value>
+                <value>classpath:main/resources/properties/logging.properties</value>
             </list>
         </property>
     </bean>
