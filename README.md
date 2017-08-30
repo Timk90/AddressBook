@@ -23,3 +23,6 @@ Class DBhelper now is useless. When visit a website you should use username: Tim
 Any questions and discussions at any time, just contact me: 
 timk90@mail.ru. 
 +79503181629 (Call or WhatsApp)
+
+WAR file https://drive.google.com/open?id=0B454J0B3DhoUSEFYbDBFc1k4UTA 
+
