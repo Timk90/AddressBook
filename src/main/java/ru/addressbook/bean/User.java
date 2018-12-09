@@ -1,4 +1,4 @@
-package main.java.ru.addressbook.bean;
+package ru.addressbook.bean;
 
 import org.springframework.stereotype.Component;
 

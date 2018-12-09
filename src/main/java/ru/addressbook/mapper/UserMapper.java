@@ -1,6 +1,6 @@
-package main.java.ru.addressbook.mapper;
+package ru.addressbook.mapper;
 
-import main.java.ru.addressbook.bean.User;
+import ru.addressbook.bean.User;
 
 import java.util.List;
 

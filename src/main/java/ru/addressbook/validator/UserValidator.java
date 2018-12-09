@@ -1,7 +1,7 @@
-package main.java.ru.addressbook.validator;
+package ru.addressbook.validator;
 
-import main.java.ru.addressbook.bean.User;
-import main.java.ru.addressbook.service.AddressBookService;
+import ru.addressbook.bean.User;
+import ru.addressbook.service.AddressBookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;

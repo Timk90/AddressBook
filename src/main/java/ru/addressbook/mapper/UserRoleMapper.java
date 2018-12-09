@@ -1,8 +1,8 @@
-package main.java.ru.addressbook.mapper;
+package ru.addressbook.mapper;
 
 
-import main.java.ru.addressbook.bean.User;
-import main.java.ru.addressbook.bean.UserRole;
+import ru.addressbook.bean.User;
+import ru.addressbook.bean.UserRole;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

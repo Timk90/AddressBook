@@ -1,9 +1,9 @@
-package main.java.ru.addressbook.service;
+package ru.addressbook.service;
 
-import main.java.ru.addressbook.bean.User;
-import main.java.ru.addressbook.bean.UserRole;
-import main.java.ru.addressbook.mapper.UserMapper;
-import main.java.ru.addressbook.mapper.UserRoleMapper;
+import ru.addressbook.bean.User;
+import ru.addressbook.bean.UserRole;
+import ru.addressbook.mapper.UserMapper;
+import ru.addressbook.mapper.UserRoleMapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

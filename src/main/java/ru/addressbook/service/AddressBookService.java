@@ -1,7 +1,7 @@
-package main.java.ru.addressbook.service;
+package ru.addressbook.service;
 
-import main.java.ru.addressbook.bean.User;
-import main.java.ru.addressbook.bean.UserRole;
+import ru.addressbook.bean.User;
+import ru.addressbook.bean.UserRole;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package main.java.ru.addressbook.bean;
+package ru.addressbook.bean;
 
 /**
  * Created by Tim on 17.08.2017.
