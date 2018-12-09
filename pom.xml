@@ -34,9 +34,10 @@
 
             <!-- плагин liquibase -->
             <plugin>
-                <groupId>org.liquibase</groupId>
-                <artifactId>liquibase-maven-plugin</artifactId>
-                <version>3.4.2</version>
+                <!-- https://mvnrepository.com/artifact/org.liquibase/liquibase-maven-plugin -->
+                    <groupId>org.liquibase</groupId>
+                    <artifactId>liquibase-maven-plugin</artifactId>
+                    <version>3.6.2</version>
                 <configuration>
                     <propertyFile>main/resources/db/liquibase/liquibase.properties</propertyFile>
                     <changeLogFile>main/resources/db/liquibase/changelog.xml</changeLogFile>
@@ -145,6 +146,13 @@
             <!--<artifactId>jcl-over-slf4j</artifactId>-->
             <!--<version>${jcl.slf4j.version}</version>-->
         <!--</dependency>-->
+
+        <!-- https://mvnrepository.com/artifact/postgresql/postgresql -->
+        <dependency>
+            <groupId>postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>9.1-901.jdbc4</version>
+        </dependency>
 
 
 
